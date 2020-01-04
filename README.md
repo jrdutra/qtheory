@@ -1,2 +1,2 @@
 # qtheory
-A python library implementing the Queueing theory calculations.
+A **python library** implementing the Queueing theory calculations.
