@@ -10,4 +10,4 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 
 # About me
 I am finishing my undergraduate in Computer engineering at *Faculdade Católica Salesiana* at *Macaé-RJ*, Brazil. I am already automation tecnician by *IFF* (*Instituto Federal Fluminense*).
-With this project, I hope to develop my programing skills and hize my horizons in programing area.
+With this project, I hope to develop my programing skills and hize my horizons in programing area .
