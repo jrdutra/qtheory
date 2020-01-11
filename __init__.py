@@ -1,2 +1,2 @@
-from .utils import clear_seconds
-from .qtheory import calculate_zeros
+from .utils import cls_seconds
+from .qtheory import eval_occurrences

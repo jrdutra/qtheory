@@ -1,6 +1,6 @@
 
 #input format ["yyyy-mm-dd HH:MM:SS"]
-def clear_seconds(arr=[]):
+def cls_seconds(arr=[]):
     toreturn=[]
     if(_is_date_time_formated(arr)):
         for item in arr:
