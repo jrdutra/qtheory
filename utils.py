@@ -2,14 +2,14 @@
 #input format ["yyyy-mm-dd HH:MM:SS"]
 def clear_seconds(arr=[]):
     toreturn=[]
-    if(is_date_time_formated(arr)):
+    if(_is_date_time_formated(arr)):
         for item in arr:
             item = item[:17] + "00"
             toreturn.append(item)
         return toreturn
     
 
-def is_date_time_formated(arr=[]):
+def _is_date_time_formated(arr=[]):
     for d in arr:
         if d == "NULL":
             raise ValueError('The value is NULL.')
