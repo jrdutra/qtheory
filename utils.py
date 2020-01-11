@@ -23,7 +23,7 @@ def is_date_time_formated(arr=[]):
         if len(date) != 10:
             raise ValueError('Incompatible date format.', 'Expected format: yyyy-mm-dd')
         
-        #separate date items
+        #separating date items
         year = date.split("-")[0]
         month = date.split("-")[1]
         day = date.split("-")[2]
@@ -44,7 +44,7 @@ def is_date_time_formated(arr=[]):
         if len(time) != 8:
             raise ValueError('Incompatible time format.', 'Expected format: HH:MM:SS')
         
-        #separate time items
+        #separating time items
         hour = time.split(":")[0]
         minute = time.split(":")[1]
         second = time.split(":")[2]
