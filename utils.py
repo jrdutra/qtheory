@@ -1,6 +1,7 @@
+import scipy.stats as st
 
 #input format ["yyyy-mm-dd HH:MM:SS"]
-def cls_seconds(arr=[]):
+def _cls_seconds(arr=[]):
     toreturn=[]
     if(_is_date_time_formated(arr)):
         for item in arr:
@@ -61,5 +62,16 @@ def _is_date_time_formated(arr=[]):
             raise ValueError('Incompatible minute value: ' + hour)
         if int(second) > 60:
             raise ValueError('Incompatible second value: ' + hour)
-
     return True
+
+def _poison_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.poisson.pmf(x,lamb))
+    return aux
+
+def _exponential_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.expon.pdf(x, 0, lamb))
+    return aux

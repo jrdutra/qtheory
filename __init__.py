@@ -1,2 +1,2 @@
-from .utils import cls_seconds
-from .qtheory import eval_occurrences
+from .qtheory import get_arrivals_per_minutes
+from .qtheory import get_real_relative_frequencys
