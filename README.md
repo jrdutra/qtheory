@@ -4,9 +4,9 @@ As my term paper, I am developing a library, implementing the calculus of queuin
 Implementing in python, this library receives a input file with queue data and gives the output answers.
 For the undergraduate thesis, I had toke some datas in a real queue and submited to the library as a input, to validate this project.
 
-#Usage
+# Usage
 
-It is a main exemple using the arrivals resources.
+It is a main exemple using the arrivals resources:
 
 ```python
 import qtheory as q
