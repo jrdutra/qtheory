@@ -6,7 +6,9 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 
 # Usage
 
-It is a main exemple using the arrivals resources:
+It is a **main.py** exemple using the arrivals resources:
+
+## Code
 
 ```python
 import qtheory as q
@@ -39,6 +41,12 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+## Result
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/usage-exemple.png)
+
+## The data file exemple (dados.csv)
+
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/csvexemple.png)
 
 # The Library Data Flow
 
