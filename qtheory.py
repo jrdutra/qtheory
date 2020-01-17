@@ -1,9 +1,57 @@
-from datetime import datetime, timedelta
 import pandas as pd
+from datetime import datetime, timedelta
 from .utils import _cls_seconds
+from .utils import _build_arrivals_per_minutes
+from .utils import _build_sample_minutes
+from .utils import _build_arrivals_df
+from .utils import _poison_distribution
+from .utils import _exponential_distribution
 
+def arrival_theoretical_comparation(arr_date_time=[], index_period_beginning=[], distribution='poisson'):
+    client_amout = len(arr_date_time)
+    df = _eval_real_relative_frequencys(arr_date_time, index_period_beginning)
+    totalMinutes = sum(df['arrivals_per_minutes'].values)
+    mlambda = client_amout/totalMinutes
 
-def get_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
+    dictionary = {}
+    aux = []
+
+    for m in df['minutes'].values:
+        aux.append(m)
+    dictionary['minutes'] = aux
+    
+    aux = []
+    for a in df['arrivals_per_minutes'].values:
+        aux.append(a)
+    dictionary['arrivals_per_minutes'] = aux
+
+    aux = []
+    for a in df['real_relative_frequency'].values:
+        aux.append(a)
+    dictionary['real_relative_frequency'] = aux
+
+    if distribution == 'poisson':
+
+        df['poisson_relative_frequency'] = _poison_distribution(mlambda, df['arrivals_per_minutes'].values)
+        aux = []
+        for a in df['poisson_relative_frequency'].values:
+            aux.append(a)
+        dictionary['poisson_relative_frequency'] = aux
+
+    elif distribution == 'exponential':
+
+        df['exponential_relative_frequency'] = _exponential_distribution(mlambda, df['arrivals_per_minutes'].values)
+        aux = []
+        for a in df['exponential_relative_frequency'].values:
+            aux.append(a)
+        dictionary['exponential_relative_frequency'] = aux
+        
+    else:
+        raise ValueError('Unrecognized Distribution: ' + distribution)
+
+    return dictionary
+
+def real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
     df = _eval_real_relative_frequencys(arr_date_time, index_period_beginning)
     
     dictionary = {}
@@ -32,7 +80,7 @@ def _eval_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
     df['real_relative_frequency'] = df['arrivals_per_minutes'].divide(other = totalMinutes)
     return df
 
-def get_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
+def arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     df = _eval_arrivals_per_minutes(arr_date_time, index_period_beginning)
     
     dictionary = {}
@@ -65,56 +113,3 @@ def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     df = _build_arrivals_df(sample_minutes, arrivals_per_minutes)
 
     return df
-
-#  return the numbers of occurrences of zero arrivals
-def _eval_zeros_arrivals(df_values, index_period_beginning=[]):
-    #convert de line of the pd in a python datetime value
-    df_date_time =  pd.to_datetime(df_values, format='%Y-%m-%d %H:%M:%S')
-    #get the ranges of observations
-    rans = _build_ranges(index_period_beginning)
-    #start the zeros amount
-    zerosAmount = 0
-    # evaluate all minuts with zero arriving in the 
-    # range of observations
-    for ran in rans:
-        #pega primeira data do intervalo
-        database = df_date_time[ran[0]]
-        for i in range(ran[0], ran[1]):
-            if database != df_date_time[i]:
-                zerosAmount = zerosAmount + 1
-            database + timedelta(minutes=1)     
-    return zerosAmount
-
-#return the ranges of queue evaluation
-def _build_ranges(index_period_beginning=[]):
-    vect_return = []
-    for i, pivot in enumerate(index_period_beginning):
-        if i < len(index_period_beginning)-1:
-            ran = [pivot, index_period_beginning[i+1]-1]
-            vect_return.append(ran)
-    return vect_return
-
-def _build_arrivals_df(sample_minutes=[], arrivals_per_minutes=[]):
-    #building the dataframe of arrivals
-    lm =  list(zip(sample_minutes, arrivals_per_minutes))
-    df = pd.DataFrame(lm, columns = ['minutes','arrivals_per_minutes'])
-    return df
-
-def _build_arrivals_per_minutes(ocurrences, df_values, index_period_beginning):
-    #build an array of ocurrences per minutes
-    ocurrences_per_minutes = ocurrences.values
-    zerosAmount = _eval_zeros_arrivals(df_values, index_period_beginning)
-    aux = [zerosAmount]
-    for f in ocurrences_per_minutes:
-        aux.append(f)
-    ocurrences_per_minutes = aux
-    return ocurrences_per_minutes
-
-def _build_sample_minutes(ocurrences):
-    arrivals_per_minutes = ocurrences.index.values
-    aux = [0] #create de space to put the zeros arrivals informations
-    for c in arrivals_per_minutes:
-        aux.append(c)
-    arrivals_per_minutes = aux
-    return arrivals_per_minutes
-
