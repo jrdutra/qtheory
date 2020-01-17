@@ -6,7 +6,7 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 
 # The Library Data Flow
 
-![PlantUML model](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuTBGqbJGrRLJK799B4bKyCmhA2rHuW8B51IbAXGKvIUd5XTdvgL31GCIYn9pKqjIYnISC_8parDXmaZg4ARvbvR0ZGFQm-MGcfS2j1C0)
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/dataflowdiagram.png)
 
 # About me
 I am finishing my undergraduate in Computer engineering at *Faculdade Católica Salesiana* at *Macaé-RJ*, Brazil. I am already automation tecnician by *IFF* (*Instituto Federal Fluminense*).
