@@ -6,15 +6,19 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 
 ### Files Organization
 
-qtheory
-|--- __init__.py
-|--- qtheory.py
-|--- arrivals.py
-|--- utils.py
+qtheory··
+|--- __init__.py··
+|--- qtheory.py··
+|--- arrivals.py··
+|--- utils.py··
 
 # Usage
 
 It is a **main.py** exemple using the arrivals resources:
+
+### The Library Data Flow
+
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/dataflowdiagram.png)
 
 ### Code
 
@@ -56,6 +60,3 @@ if __name__ == "__main__":
 
 ![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/csvexemple.png)
 
-# The Library Data Flow
-
-![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/dataflowdiagram.png)
