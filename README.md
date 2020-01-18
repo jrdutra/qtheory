@@ -6,11 +6,16 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 
 ### Files Organization
 
-qtheory··
-|--- __init__.py··
-|--- qtheory.py··
-|--- arrivals.py··
-|--- utils.py··
+```bash
+qtheory
+├── __init__.py
+├── qtheory.py
+├── arrivals.py
+├── utils.py
+├── requirements.txt
+└── README.md
+```bash
+
 
 # Usage
 
