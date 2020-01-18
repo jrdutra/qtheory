@@ -16,14 +16,13 @@ qtheory
 └── README.md
 ```
 
-
-# Usage
-
-It is a **main.py** exemple using the arrivals resources:
-
 ### The Library Data Flow
 
 ![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/dataflowdiagram.png)
+
+# The Library Usage
+
+It is a **main.py** exemple using the arrivals resources:
 
 ### Code
 
