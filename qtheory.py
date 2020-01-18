@@ -4,7 +4,7 @@ from . import utils
 from . import arrivals
 
 #---------------------------------------
-# Arrivals functions
+# Public Arrivals functions
 #---------------------------------------
 def arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     df = arrivals._eval_arrivals_per_minutes(arr_date_time, index_period_beginning)
