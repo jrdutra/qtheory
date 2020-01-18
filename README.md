@@ -14,7 +14,7 @@ qtheory
 ├── utils.py
 ├── requirements.txt
 └── README.md
-```bash
+```
 
 
 # Usage
