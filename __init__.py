@@ -1,3 +1,3 @@
 from .qtheory import arrivals_per_minutes
-from .qtheory import real_relative_frequencys
-from .qtheory import arrival_theoretical_comparation
+from .qtheory import arrivals_relative_frequencys
+from .qtheory import arrivals_theoretical_comparation

@@ -4,6 +4,10 @@ from .utils import _poison_distribution
 from .utils import _exponential_distribution
 import pandas as pd
 
+#---------------------------------------
+# Main Functions
+#---------------------------------------
+
 def _eval_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
     df = _eval_arrivals_per_minutes(arr_date_time, index_period_beginning)
     #calculate the total minutes of all observation
@@ -28,6 +32,10 @@ def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     df = _build_arrivals_df(sample_minutes, arrivals_per_minutes)
 
     return df
+
+#---------------------------------------
+# Secundary Functions
+#---------------------------------------
 
 #  return the numbers of occurrences of zero arrivals
 def _eval_zeros_arrivals(df_values, index_period_beginning=[]):
