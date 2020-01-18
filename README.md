@@ -4,11 +4,19 @@ As my term paper, I am developing a library, implementing the calculus of queuin
 Implementing in python, this library receives a input file with queue data and gives the output answers.
 For the undergraduate thesis, I had toke some datas in a real queue and submited to the library as a input, to validate this project.
 
+### Files Organization
+
+qtheory
+|--- __init__.py
+|--- qtheory.py
+|--- arrivals.py
+|--- utils.py
+
 # Usage
 
 It is a **main.py** exemple using the arrivals resources:
 
-## Code
+### Code
 
 ```python
 import qtheory as q
@@ -41,17 +49,13 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-## Result
+### Result
 ![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/usage-exemple.png)
 
-## The data file exemple (dados.csv)
+### The data file exemple (dados.csv)
 
 ![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/csvexemple.png)
 
 # The Library Data Flow
 
 ![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/dataflowdiagram.png)
-
-# About me
-I am finishing my undergraduate in Computer engineering at *Faculdade Católica Salesiana* at *Macaé-RJ*, Brazil. I am already automation tecnician by *IFF* (*Instituto Federal Fluminense*).
-With this project, I hope to develop my programing skills and hize my horizons in programing area .
