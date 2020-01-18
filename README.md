@@ -42,15 +42,15 @@ if __name__ == "__main__":
     main()
 ```
 ## Result
-![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/usage-exemple.png)
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/usage-exemple.png)
 
 ## The data file exemple (dados.csv)
 
-![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/csvexemple.png)
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/csvexemple.png)
 
 # The Library Data Flow
 
-![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory/master/images/dataflowdiagram.png)
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/dataflowdiagram.png)
 
 # About me
 I am finishing my undergraduate in Computer engineering at *Faculdade Católica Salesiana* at *Macaé-RJ*, Brazil. I am already automation tecnician by *IFF* (*Instituto Federal Fluminense*).
