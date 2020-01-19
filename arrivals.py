@@ -1,8 +1,6 @@
 from datetime import datetime, timedelta
-from .utils import _cls_seconds
-from .utils import _poison_distribution
-from .utils import _exponential_distribution
 import pandas as pd
+from . import utils
 
 #---------------------------------------
 # Main Functions
@@ -18,7 +16,7 @@ def _eval_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
 
 def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     #set all seconds data to zero
-    arr_date_time = _cls_seconds(arr_date_time)
+    arr_date_time = utils._cls_seconds(arr_date_time)
     #convert in a pd dataframe
     df=pd.DataFrame(data=arr_date_time)
     df_values = df[0]
@@ -67,8 +65,7 @@ def _build_ranges(index_period_beginning=[]):
 
 def _build_arrivals_df(sample_minutes=[], arrivals_per_minutes=[]):
     #building the dataframe of arrivals
-    lm =  list(zip(sample_minutes, arrivals_per_minutes))
-    df = pd.DataFrame(lm, columns = ['minutes','arrivals_per_minutes'])
+    df = utils._build_df(sample_minutes, arrivals_per_minutes, 'minutes', 'arrivals_per_minutes')
     return df
 
 def _build_arrivals_per_minutes(ocurrences, df_values, index_period_beginning):

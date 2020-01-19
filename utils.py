@@ -1,6 +1,7 @@
 import scipy.stats as st
 from datetime import datetime, timedelta
 import pandas as pd
+import numpy as np
 
 #input format ["yyyy-mm-dd HH:MM:SS"]
 def _cls_seconds(arr=[]):
@@ -66,6 +67,33 @@ def _is_date_time_formated(arr=[]):
             raise ValueError('Incompatible second value: ' + hour)
     return True
 
+def _cls_not_str(vect=[]):
+    v = vect
+    ret = []
+    for item in v:
+        if type(item) is str:
+            ret.append(item)
+    return ret
+
+def _verify_vect_pair(start_service=[], end_service=[]):
+    
+    if len(start_service) != len(end_service):
+        raise ValueError('Incompatible size of both vectors.')
+        
+    if not _is_date_time_formated(start_service):
+        raise ValueError('Incompatible format.')
+
+    if not _is_date_time_formated(end_service):
+        raise ValueError('Incompatible format.')
+
+    return True
+
+def _build_df(vect1, vect2, title1, title2):
+    #building the dataframe of arrivals
+    lm =  list(zip(vect1, vect2))
+    df = pd.DataFrame(lm, columns = [title1, title2])
+    return df
+
 def _poison_distribution(lamb, vet=[]):
     aux=[]
     for x in vet:
@@ -78,3 +106,26 @@ def _exponential_distribution(lamb, vet=[]):
         aux.append(st.expon.pdf(x, 0, lamb))
     return aux
 
+def _exponentialnorm_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.exponnorm.pdf(x, lamb))
+    return aux
+
+def _exponentialpow_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.exponpow.pdf(x, lamb))
+    return aux
+
+def _erlang_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.erlang.pdf(x, lamb))
+    return aux
+
+def _gamma_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.gamma.pdf(x, lamb))
+    return aux
