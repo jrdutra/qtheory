@@ -2,13 +2,6 @@ from . import utils
 from datetime import datetime, timedelta
 import pandas as pd
 
-def first_func(start_service=[], end_service=[]):
-    #Execute if both pair is OK by data format or same size.
-
-    df = _eval_real_relative_frequencys(start_service, end_service)
-
-    return df
-
 def _eval_real_relative_frequencys(start_service=[], end_service=[]):
     #Execute if both pair is OK by data format or same size.
     df_repetitions = _eval_service_minutes_occurrence(start_service, end_service)
@@ -69,3 +62,13 @@ def _eval_total_minutes(start_service=[], end_service=[]):
     total_minutes = total_seconds/60
     
     return total_minutes
+
+def _eval_mi(start_service=[], end_service=[]):
+    df = _eval_real_relative_frequencys(start_service, end_service)
+    
+    total_atendance = df.sum()['repetitions']
+    total_minutes = _eval_total_minutes(start_service, end_service)
+
+    mi = total_minutes/total_atendance
+
+    return mi

@@ -8,6 +8,9 @@ from . import service
 # Public Service functions
 #---------------------------------------
 
+def eval_mi(start_service=[], end_service=[]):
+    return service._eval_mi(start_service, end_service)
+
 def service_minutes_occurrence(start_service=[], end_service=[]):
 
     df = service._eval_service_minutes_occurrence(start_service, end_service)
@@ -51,10 +54,11 @@ def service_relative_frequencys(start_service=[], end_service=[]):
 def service_theoretical_comparation(start_service=[], end_service=[], distribution='poisson'):
     df = service._eval_real_relative_frequencys(start_service, end_service)
     
-    total_atendance = df.sum()['repetitions']
-    total_minutes = service._eval_total_minutes(start_service, end_service)
+    #total_atendance = df.sum()['repetitions']
+    #total_minutes = service._eval_total_minutes(start_service, end_service)
 
-    mlambda = total_minutes/total_atendance
+    #mi = total_minutes/total_atendance
+    mi = service._eval_mi(start_service, end_service)
 
     dictionary = {}
     aux = []
@@ -74,7 +78,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
 
     if distribution == 'poisson':
 
-        df['poisson_relative_frequency'] = utils._poison_distribution(mlambda, df['repetitions'].values)
+        df['poisson_relative_frequency'] = utils._poison_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['poisson_relative_frequency'].values:
             aux.append(a)
@@ -82,7 +86,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
 
     elif distribution == 'exponential':
 
-        df['exponential_relative_frequency'] = utils._exponential_distribution(mlambda, df['repetitions'].values)
+        df['exponential_relative_frequency'] = utils._exponential_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['exponential_relative_frequency'].values:
             aux.append(a)
@@ -90,7 +94,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
     
     elif distribution == 'exponentialnorm':
 
-        df['exponentialnorm_relative_frequency'] = utils._exponentialnorm_distribution(mlambda, df['repetitions'].values)
+        df['exponentialnorm_relative_frequency'] = utils._exponentialnorm_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['exponentialnorm_relative_frequency'].values:
             aux.append(a)
@@ -98,7 +102,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
 
     elif distribution == 'exponentialpow':
 
-        df['exponentialpow_relative_frequency'] = utils._exponentialpow_distribution(mlambda, df['repetitions'].values)
+        df['exponentialpow_relative_frequency'] = utils._exponentialpow_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['exponentialpow_relative_frequency'].values:
             aux.append(a)
@@ -106,7 +110,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
 
     elif distribution == 'erlang':
 
-        df['erlang_relative_frequency'] = utils._erlang_distribution(mlambda, df['repetitions'].values)
+        df['erlang_relative_frequency'] = utils._erlang_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['erlang_relative_frequency'].values:
             aux.append(a)
@@ -114,7 +118,7 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
     
     elif distribution == 'gamma':
 
-        df['gamma_relative_frequency'] = utils._gamma_distribution(mlambda, df['repetitions'].values)
+        df['gamma_relative_frequency'] = utils._gamma_distribution(mi, df['repetitions'].values)
         aux = []
         for a in df['gamma_relative_frequency'].values:
             aux.append(a)
@@ -129,6 +133,10 @@ def service_theoretical_comparation(start_service=[], end_service=[], distributi
 #---------------------------------------
 # Public Arrivals functions
 #---------------------------------------
+
+def eval_lambda(arr_date_time=[], index_period_beginning=[]):
+    return arrivals._eval_lambda(arr_date_time, index_period_beginning)
+
 def arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     df = arrivals._eval_arrivals_per_minutes(arr_date_time, index_period_beginning)
     

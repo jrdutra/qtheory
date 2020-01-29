@@ -31,6 +31,19 @@ def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
 
     return df
 
+def _eval_lambda(arr_date_time=[], index_period_beginning=[]):
+    #Execute if both pair is OK by data format or same size.
+
+    client_amout = len(arr_date_time)
+
+    df = _eval_real_relative_frequencys(arr_date_time, index_period_beginning)
+
+    totalMinutes = sum(df['arrivals_per_minutes'].values)
+
+    mlambda = client_amout/totalMinutes
+
+    return mlambda
+
 #---------------------------------------
 # Secundary Functions
 #---------------------------------------
