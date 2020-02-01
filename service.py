@@ -1,74 +1,127 @@
-from . import utils
-from datetime import datetime, timedelta
-import pandas as pd
+from . import _service
+from . import _utils
 
-def _eval_real_relative_frequencys(start_service=[], end_service=[]):
-    #Execute if both pair is OK by data format or same size.
-    df_repetitions = _eval_service_minutes_occurrence(start_service, end_service)
+#---------------------------------------
+# Service public functions
+#---------------------------------------
 
-    total_minutes = df_repetitions.sum()['repetitions']
+def eval_mi(start_service=[], end_service=[]):
+    return _service._eval_mi(start_service, end_service)
 
-    df_repetitions['real_relative_frequency'] = df_repetitions['repetitions'].divide(other = total_minutes)
+def service_minutes_occurrence(start_service=[], end_service=[]):
 
-    return df_repetitions
+    df = _service._eval_service_minutes_occurrence(start_service, end_service)
 
-def _eval_service_minutes_occurrence(start_service=[], end_service=[]):
-    #Clear not string values.
-    start_service = utils._cls_not_str(start_service)
-    end_service = utils._cls_not_str(end_service)
+    dictionary = {}
+    aux = []
 
-    #Execute if both pair is OK by data format or same size.
-    if utils._verify_vect_pair(start_service, end_service):
-        df = _eval_approximate_duration(start_service, end_service)
-        #Calculate the repetitions
-        repeats = df['approximate_duration'].value_counts()
-
-        list_time = []
-        for linha in repeats.index:
-            list_time.append(linha.total_seconds()/60)
-            
-        list_repetitions = []
-        for linha in repeats.values:
-            list_repetitions.append(linha)
-
-        df_repetitions = utils._build_df(list_time, list_repetitions, 'minutes', 'repetitions')
-        return df_repetitions
-
-def _eval_approximate_duration(start_service=[], end_service=[]):
-    df = utils._build_df(start_service, end_service, 'start_service', 'end_service')
-    # Convert to date time format
-    df['start_service'] = pd.to_datetime(df['start_service'], format='%Y-%m-%d %H:%M:%S')
-    df['end_service'] = pd.to_datetime(df['end_service'], format='%Y-%m-%d %H:%M:%S')
+    for m in df['minutes'].values:
+        aux.append(m)
+    dictionary['minutes'] = aux
     
-    # Calculate service_duration
-    df['service_duration'] = df['end_service'] - df['start_service']
+    aux = []
 
-    #Aproximate the service suration do integer minutes
-    df['approximate_duration'] = df['service_duration'].dt.ceil('1min')
+    for a in df['repetitions'].values:
+        aux.append(a)
+    dictionary['repetitions'] = aux
 
-    return df
+    return dictionary
 
-def _eval_total_minutes(start_service=[], end_service=[]):
-    #Clear not string values.
-    start_service = utils._cls_not_str(start_service)
-    end_service = utils._cls_not_str(end_service)
+def service_relative_frequencys(start_service=[], end_service=[]):
+    df = _service._eval_real_relative_frequencys(start_service, end_service)
 
-    df = _eval_approximate_duration(start_service, end_service)
-
-    total_seconds = 0
-
-    for i in range(df['service_duration'].count()):
-        total_seconds = total_seconds + df['service_duration'][i].total_seconds()
-    total_minutes = total_seconds/60
+    dictionary = {}
+    aux = []
+    for m in df['minutes'].values:
+        aux.append(m)
+    dictionary['minutes'] = aux
     
-    return total_minutes
+    aux = []
+    for a in df['repetitions'].values:
+        aux.append(a)
+    dictionary['repetitions'] = aux
 
-def _eval_mi(start_service=[], end_service=[]):
-    df = _eval_real_relative_frequencys(start_service, end_service)
+    aux = []
+    for a in df['real_relative_frequency'].values:
+        aux.append(a)
+    dictionary['real_relative_frequency'] = aux
+
+    return dictionary
+
+def service_theoretical_comparation(start_service=[], end_service=[], distribution='poisson'):
+    df = _service._eval_real_relative_frequencys(start_service, end_service)
     
-    total_atendance = df.sum()['repetitions']
-    total_minutes = _eval_total_minutes(start_service, end_service)
+    #total_atendance = df.sum()['repetitions']
+    #total_minutes = service._eval_total_minutes(start_service, end_service)
 
-    mi = total_minutes/total_atendance
+    #mi = total_minutes/total_atendance
+    mi = _service._eval_mi(start_service, end_service)
 
-    return mi
+    dictionary = {}
+    aux = []
+    for m in df['minutes'].values:
+        aux.append(m)
+    dictionary['minutes'] = aux
+    
+    aux = []
+    for a in df['repetitions'].values:
+        aux.append(a)
+    dictionary['repetitions'] = aux
+
+    aux = []
+    for a in df['real_relative_frequency'].values:
+        aux.append(a)
+    dictionary['real_relative_frequency'] = aux
+
+    if distribution == 'poisson':
+
+        df['poisson_relative_frequency'] = _utils._poison_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['poisson_relative_frequency'].values:
+            aux.append(a)
+        dictionary['poisson_relative_frequency'] = aux
+
+    elif distribution == 'exponential':
+
+        df['exponential_relative_frequency'] = _utils._exponential_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['exponential_relative_frequency'].values:
+            aux.append(a)
+        dictionary['exponential_relative_frequency'] = aux
+    
+    elif distribution == 'exponentialnorm':
+
+        df['exponentialnorm_relative_frequency'] = _utils._exponentialnorm_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['exponentialnorm_relative_frequency'].values:
+            aux.append(a)
+        dictionary['exponentialnorm_relative_frequency'] = aux
+
+    elif distribution == 'exponentialpow':
+
+        df['exponentialpow_relative_frequency'] = _utils._exponentialpow_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['exponentialpow_relative_frequency'].values:
+            aux.append(a)
+        dictionary['exponentialpow_relative_frequency'] = aux
+
+    elif distribution == 'erlang':
+
+        df['erlang_relative_frequency'] = _utils._erlang_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['erlang_relative_frequency'].values:
+            aux.append(a)
+        dictionary['erlang_relative_frequency'] = aux
+    
+    elif distribution == 'gamma':
+
+        df['gamma_relative_frequency'] = _utils._gamma_distribution(mi, df['repetitions'].values)
+        aux = []
+        for a in df['gamma_relative_frequency'].values:
+            aux.append(a)
+        dictionary['gamma_relative_frequency'] = aux
+
+    else:
+        raise ValueError('Unrecognized Distribution: ' + distribution)
+
+    return dictionary
