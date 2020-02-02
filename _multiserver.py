@@ -1,6 +1,36 @@
 from math import factorial
 from . import _arrival
 from . import _service
+from . import _utils
+
+def _eval_Ws(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+     
+    ls = _eval_Ls(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+
+    mlambda = _arrival._eval_lambda(arr_date_time, index_period_beginning)
+
+    ws = ls / mlambda
+
+    return ws
+
+def _eval_Wq(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+    lq = _eval_Lq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+
+    mlambda = _arrival._eval_lambda(arr_date_time, index_period_beginning)
+
+    wq = lq / mlambda
+
+    return wq
+
+def _eval_Ls(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+
+    lq = _eval_Lq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+
+    roh = _eval_roh(arr_date_time, index_period_beginning, start_service, end_service)
+
+    ls = lq + roh
+
+    return ls
 
 def _eval_Lq(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
 
@@ -68,6 +98,8 @@ def _eval_roh(arr_date_time=[], index_period_beginning=[], start_service=[], end
     mlambda = _arrival._eval_lambda(arr_date_time, index_period_beginning)
 
     mi = _service._eval_mi(start_service, end_service)
+
+    
     
     roh = mlambda/mi
 

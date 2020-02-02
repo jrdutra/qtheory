@@ -12,30 +12,19 @@ from . import _multiserver
 
 def eval_Ws(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
      
-    ls = eval_Ls(n, c, arr_date_time, index_period_beginning, start_service, end_service)
-
-    mlambda = _arrival._eval_lambda(arr_date_time, index_period_beginning)
-
-    ws = ls / mlambda
+    ws = eval_Ws(n, c, arr_date_time, index_period_beginning, start_service, end_service)
 
     return ws
 
 def eval_Wq(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
-    lq = _multiserver._eval_Lq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
 
-    mlambda = _arrival._eval_lambda(arr_date_time, index_period_beginning)
-
-    wq = lq / mlambda
+    wq = _multiserver._eval_Wq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
 
     return wq
 
 def eval_Ls(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
 
-    lq = _multiserver._eval_Lq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
-
-    roh = _multiserver._eval_roh(arr_date_time, index_period_beginning, start_service, end_service)
-
-    ls = lq + roh
+    ls = _multiserver._eval_Ls(n, c, arr_date_time, index_period_beginning, start_service, end_service)
 
     return ls
 
