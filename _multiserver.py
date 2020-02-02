@@ -1,9 +1,5 @@
 from math import factorial
-#from . import _arrival
-#from . import _leave
 from . import _stats
-#from . import _service
-from . import _utils
 
 def _eval_Ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
      
@@ -110,7 +106,7 @@ def _eval_lambda_n(n=0, arr_date_time=[], index_period_beginning=[]):
         lambda_n = _stats._eval_rate(arr_date_time, index_period_beginning)
     else:
         raise ValueError("n must be bigger then 0, but n=" + n)
-    
+
     return lambda_n
 
 def _eval_mi_n(n=0, c=1, leave_times=[], index_period_beginning=[]):

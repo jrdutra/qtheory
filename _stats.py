@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import pandas as pd
+import scipy.stats as st
 from . import _utils
 
 #----------------------------------
@@ -45,7 +46,6 @@ def _eval_rate(arr_date_time=[], index_period_beginning=[]):
     return rate
 
 #--------------------------------------------------------------------------------
-
 #  return the numbers of occurrences of zero occurrence
 def _eval_zeros_occurrence(df_values, index_period_beginning=[]):
     #convert de line of the pd in a python datetime value
@@ -96,3 +96,42 @@ def _build_sample_minutes(ocurrences):
         aux.append(c)
     occurrence_per_minutes = aux
     return occurrence_per_minutes
+
+#--------------------------------------------------------------------------------
+#  Distributions
+
+def _poison_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.poisson.pmf(x,lamb))
+    return aux
+
+def _exponential_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.expon.pdf(x, 0, lamb))
+    return aux
+
+def _exponentialnorm_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.exponnorm.pdf(x, lamb))
+    return aux
+
+def _exponentialpow_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.exponpow.pdf(x, lamb))
+    return aux
+
+def _erlang_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.erlang.pdf(x, lamb))
+    return aux
+
+def _gamma_distribution(lamb, vet=[]):
+    aux=[]
+    for x in vet:
+        aux.append(st.gamma.pdf(x, lamb))
+    return aux

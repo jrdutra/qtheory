@@ -94,38 +94,3 @@ def _build_df(vect1, vect2, title1, title2):
     df = pd.DataFrame(lm, columns = [title1, title2])
     return df
 
-def _poison_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.poisson.pmf(x,lamb))
-    return aux
-
-def _exponential_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.expon.pdf(x, 0, lamb))
-    return aux
-
-def _exponentialnorm_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.exponnorm.pdf(x, lamb))
-    return aux
-
-def _exponentialpow_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.exponpow.pdf(x, lamb))
-    return aux
-
-def _erlang_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.erlang.pdf(x, lamb))
-    return aux
-
-def _gamma_distribution(lamb, vet=[]):
-    aux=[]
-    for x in vet:
-        aux.append(st.gamma.pdf(x, lamb))
-    return aux
