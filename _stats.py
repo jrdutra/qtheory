@@ -3,18 +3,18 @@ import pandas as pd
 from . import _utils
 
 #----------------------------------
-# Arrival private functions
+# Stats private functions
 #----------------------------------
 
 def _eval_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
-    df = _eval_arrivals_per_minutes(arr_date_time, index_period_beginning)
+    df = _eval_occurrence_per_minutes(arr_date_time, index_period_beginning)
     #calculate the total minutes of all observation
-    totalMinutes = sum(df['arrivals_per_minutes'].values)
-    #divide all lines of the column arrivals_per_minuts for totalMinutes
-    df['real_relative_frequency'] = df['arrivals_per_minutes'].divide(other = totalMinutes)
+    totalMinutes = sum(df['occurrence_per_minutes'].values)
+    #divide all lines of the column occurrence_per_minuts for totalMinutes
+    df['real_relative_frequency'] = df['occurrence_per_minutes'].divide(other = totalMinutes)
     return df
 
-def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
+def _eval_occurrence_per_minutes(arr_date_time=[], index_period_beginning=[]):
     #set all seconds data to zero
     arr_date_time = _utils._cls_seconds(arr_date_time)
     #convert in a pd dataframe
@@ -23,31 +23,31 @@ def _eval_arrivals_per_minutes(arr_date_time=[], index_period_beginning=[]):
     repeats = df_values.value_counts()
     ocurrences = repeats.value_counts()
 
-    arrivals_per_minutes = _build_arrivals_per_minutes(ocurrences, df_values, index_period_beginning)
+    occurrence_per_minutes = _build_occurrence_per_minutes(ocurrences, df_values, index_period_beginning)
 
     sample_minutes = _build_sample_minutes(ocurrences)
 
-    df = _build_arrivals_df(sample_minutes, arrivals_per_minutes)
+    df = _build_occurrence_df(sample_minutes, occurrence_per_minutes)
 
     return df
 
-def _eval_lambda(arr_date_time=[], index_period_beginning=[]):
+def _eval_rate(arr_date_time=[], index_period_beginning=[]):
     #Execute if both pair is OK by data format or same size.
 
     client_amout = len(arr_date_time)
 
     df = _eval_real_relative_frequencys(arr_date_time, index_period_beginning)
 
-    totalMinutes = sum(df['arrivals_per_minutes'].values)
+    totalMinutes = sum(df['occurrence_per_minutes'].values)
 
-    mlambda = client_amout/totalMinutes
+    rate = client_amout/totalMinutes
 
-    return mlambda
+    return rate
 
 #--------------------------------------------------------------------------------
 
-#  return the numbers of occurrences of zero arrivals
-def _eval_zeros_arrivals(df_values, index_period_beginning=[]):
+#  return the numbers of occurrences of zero occurrence
+def _eval_zeros_occurrence(df_values, index_period_beginning=[]):
     #convert de line of the pd in a python datetime value
     df_date_time =  pd.to_datetime(df_values, format='%Y-%m-%d %H:%M:%S')
     #get the ranges of observations
@@ -74,15 +74,15 @@ def _build_ranges(index_period_beginning=[]):
             vect_return.append(ran)
     return vect_return
 
-def _build_arrivals_df(sample_minutes=[], arrivals_per_minutes=[]):
-    #building the dataframe of arrivals
-    df = _utils._build_df(sample_minutes, arrivals_per_minutes, 'minutes', 'arrivals_per_minutes')
+def _build_occurrence_df(sample_minutes=[], occurrence_per_minutes=[]):
+    #building the dataframe of occurrence
+    df = _utils._build_df(sample_minutes, occurrence_per_minutes, 'minutes', 'occurrence_per_minutes')
     return df
 
-def _build_arrivals_per_minutes(ocurrences, df_values, index_period_beginning):
+def _build_occurrence_per_minutes(ocurrences, df_values, index_period_beginning):
     #build an array of ocurrences per minutes
     ocurrences_per_minutes = ocurrences.values
-    zerosAmount = _eval_zeros_arrivals(df_values, index_period_beginning)
+    zerosAmount = _eval_zeros_occurrence(df_values, index_period_beginning)
     aux = [zerosAmount]
     for f in ocurrences_per_minutes:
         aux.append(f)
@@ -90,9 +90,9 @@ def _build_arrivals_per_minutes(ocurrences, df_values, index_period_beginning):
     return ocurrences_per_minutes
 
 def _build_sample_minutes(ocurrences):
-    arrivals_per_minutes = ocurrences.index.values
-    aux = [0] #create de space to put the zeros arrivals informations
-    for c in arrivals_per_minutes:
+    occurrence_per_minutes = ocurrences.index.values
+    aux = [0] #create de space to put the zeros occurrence informations
+    for c in occurrence_per_minutes:
         aux.append(c)
-    arrivals_per_minutes = aux
-    return arrivals_per_minutes
+    occurrence_per_minutes = aux
+    return occurrence_per_minutes

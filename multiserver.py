@@ -1,6 +1,4 @@
 from math import factorial
-from . import _arrival
-from . import _service
 from . import _multiserver
 
 #-------------------------------------------------
@@ -10,31 +8,32 @@ from . import _multiserver
 # c is the number of servers of the queue system.
 #-------------------------------------------------
 
-def eval_Ws(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_Ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
      
-    ws = eval_Ws(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+    ws = _multiserver._eval_Ws(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ws
 
-def eval_Wq(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_Wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    wq = _multiserver._eval_Wq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+    wq = _multiserver._eval_Wq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return wq
 
-def eval_Ls(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_Ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    ls = _multiserver._eval_Ls(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+    ls = _multiserver._eval_Ls(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ls
 
-def eval_Lq(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_Lq(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    lq = _multiserver._eval_Lq(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+    lq = _multiserver._eval_Lq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return lq
 
-def eval_pn(n, c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+    
     """This funtion evaluate the probability do have 0 persons/items in the queue
 
         Parameters:
@@ -59,11 +58,11 @@ def eval_pn(n, c, arr_date_time=[], index_period_beginning=[], start_service=[],
         double:roh value
 
     """
-    pn = _multiserver._eval_pn(n, c, arr_date_time, index_period_beginning, start_service, end_service)
+    pn = _multiserver._eval_pn(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return pn
 
-def eval_p0(c, arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_p0(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
     """This funtion evaluate the probability do have 0 persons/items in the queue
 
         Parameters:
@@ -86,11 +85,11 @@ def eval_p0(c, arr_date_time=[], index_period_beginning=[], start_service=[], en
         double:roh value
 
     """
-    p0 = _multiserver._eval_p0(c, arr_date_time, index_period_beginning, start_service, end_service)
+    p0 = _multiserver._eval_p0(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return p0
 
-def eval_roh(arr_date_time=[], index_period_beginning=[], start_service=[], end_service=[]):
+def eval_roh(arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     """This funtion evaluate the roh = lambda/mi.
 
@@ -112,7 +111,7 @@ def eval_roh(arr_date_time=[], index_period_beginning=[], start_service=[], end_
         double:roh value
 
     """
-    roh = _multiserver._eval_roh(arr_date_time, index_period_beginning, start_service, end_service)
+    roh = _multiserver._eval_roh(arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return roh
 
@@ -138,7 +137,7 @@ def eval_lambda_n(n=0, arr_date_time=[], index_period_beginning=[]):
 
     return lambda_n
 
-def eval_mi_n(n=0, c=1, start_service=[], end_service=[]):
+def eval_mi_n(n=0, c=1, leave_times=[], index_period_beginning=[]):
     """This funtion evaluate the mi n.
 
         Parameters:
@@ -158,6 +157,6 @@ def eval_mi_n(n=0, c=1, start_service=[], end_service=[]):
         double: mi_n value
 
     """
-    mi_n = _multiserver._eval_mi_n(n, c, start_service, end_service)
+    mi_n = _multiserver._eval_mi_n(n, c, leave_times, index_period_beginning)
     
     return mi_n
