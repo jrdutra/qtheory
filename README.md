@@ -9,12 +9,17 @@ For the undergraduate thesis, I had toke some datas in a real queue and submited
 ```bash
 qtheory
 ├── __init__.py
-├── qtheory.py
-├── arrivals.py
-├── service.py
-├── utils.py
-├── requirements.txt
-└── README.md
+├── _multiserver.py
+├── multiserver.py
+├── _singleserver.py
+├── singleserver.py
+├── _stats.py
+├── stats.py
+├── _utils.py
+├── README.md
+└── requirements.txt
+
+
 ```
 
 ### The Library Data Flow
