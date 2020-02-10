@@ -7,28 +7,31 @@ from . import _utils
 # Stats private functions
 #----------------------------------
 
-def _eval_real_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
-    df = _eval_occurrence_per_minutes(arr_date_time, index_period_beginning)
+def _eval_real_relative_frequency(arr_date_time=[], index_period_beginning=[]):
+    df = _eval_frequency(arr_date_time, index_period_beginning)
     #calculate the total minutes of all observation
-    totalMinutes = sum(df['occurrence_per_minutes'].values)
+    totalMinutes = sum(df['frequency'].values)
     #divide all lines of the column occurrence_per_minuts for totalMinutes
-    df['real_relative_frequency'] = df['occurrence_per_minutes'].divide(other = totalMinutes)
+    df['real_relative_frequency'] = df['frequency'].divide(other = totalMinutes)
     return df
 
-def _eval_occurrence_per_minutes(arr_date_time=[], index_period_beginning=[]):
+def _eval_frequency(arr_date_time=[], index_period_beginning=[]):
     #set all seconds data to zero
     arr_date_time = _utils._cls_seconds(arr_date_time)
     #convert in a pd dataframe
     df=pd.DataFrame(data=arr_date_time)
+
     df_values = df[0]
+
     repeats = df_values.value_counts()
-    ocurrences = repeats.value_counts()
+    
+    no_zero_frequency = repeats.value_counts()
 
-    occurrence_per_minutes = _build_occurrence_per_minutes(ocurrences, df_values, index_period_beginning)
+    frequency = _build_frequency_per_minutes(no_zero_frequency, df_values, index_period_beginning)
 
-    sample_minutes = _build_sample_minutes(ocurrences)
+    sample_minutes = _build_sample_minutes(no_zero_frequency)
 
-    df = _build_occurrence_df(sample_minutes, occurrence_per_minutes)
+    df = _build_frequency_df(sample_minutes, frequency)
 
     return df
 
@@ -37,9 +40,9 @@ def _eval_rate(arr_date_time=[], index_period_beginning=[]):
 
     client_amout = len(arr_date_time)
 
-    df = _eval_real_relative_frequencys(arr_date_time, index_period_beginning)
+    df = _eval_real_relative_frequency(arr_date_time, index_period_beginning)
 
-    totalMinutes = sum(df['occurrence_per_minutes'].values)
+    totalMinutes = sum(df['frequency'].values)
 
     rate = client_amout/totalMinutes
 
@@ -74,20 +77,20 @@ def _build_ranges(index_period_beginning=[]):
             vect_return.append(ran)
     return vect_return
 
-def _build_occurrence_df(sample_minutes=[], occurrence_per_minutes=[]):
+def _build_frequency_df(sample_minutes=[], frequency=[]):
     #building the dataframe of occurrence
-    df = _utils._build_df(sample_minutes, occurrence_per_minutes, 'minutes', 'occurrence_per_minutes')
+    df = _utils._build_df(sample_minutes, frequency, 'ocurrence', 'frequency')
     return df
 
-def _build_occurrence_per_minutes(ocurrences, df_values, index_period_beginning):
+def _build_frequency_per_minutes(no_zero_frequency, df_values, index_period_beginning):
     #build an array of ocurrences per minutes
-    ocurrences_per_minutes = ocurrences.values
+    no_zero_frequency = no_zero_frequency.values
     zerosAmount = _eval_zeros_occurrence(df_values, index_period_beginning)
     aux = [zerosAmount]
-    for f in ocurrences_per_minutes:
+    for f in no_zero_frequency:
         aux.append(f)
-    ocurrences_per_minutes = aux
-    return ocurrences_per_minutes
+    frequency = aux
+    return frequency
 
 def _build_sample_minutes(ocurrences):
     occurrence_per_minutes = ocurrences.index.values

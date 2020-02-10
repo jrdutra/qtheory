@@ -5,38 +5,38 @@ from . import _utils
 # occurrence public functions
 #----------------------------------
 
-def eval_rate(arr_date_time=[], index_period_beginning=[]):
+def rate(arr_date_time=[], index_period_beginning=[]):
     return _stats._eval_rate(arr_date_time, index_period_beginning)
 
-def occurrence_per_minutes(arr_date_time=[], index_period_beginning=[]):
-    df = _stats._eval_occurrence_per_minutes(arr_date_time, index_period_beginning)
+def frequency(arr_date_time=[], index_period_beginning=[]):
+    df = _stats._eval_frequency(arr_date_time, index_period_beginning)
     
     dictionary = {}
     aux = []
 
-    for m in df['minutes'].values:
+    for m in df['ocurrence'].values:
         aux.append(m)
     dictionary['ocurrence'] = aux
     
     aux = []
 
-    for a in df['occurrence_per_minutes'].values:
+    for a in df['frequency'].values:
         aux.append(a)
     dictionary['frequency'] = aux
 
     return dictionary
 
-def occurrence_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
-    df = _stats._eval_real_relative_frequencys(arr_date_time, index_period_beginning)
+def real_relative_frequency(arr_date_time=[], index_period_beginning=[]):
+    df = _stats._eval_real_relative_frequency(arr_date_time, index_period_beginning)
     
     dictionary = {}
     aux = []
-    for m in df['minutes'].values:
+    for m in df['ocurrence'].values:
         aux.append(m)
     dictionary['ocurrence'] = aux
     
     aux = []
-    for a in df['occurrence_per_minutes'].values:
+    for a in df['frequency'].values:
         aux.append(a)
     dictionary['frequency'] = aux
 
@@ -47,25 +47,25 @@ def occurrence_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
 
     return dictionary
 
-def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=[], distribution='poisson'):
+def real_theoretical_comparation(arr_date_time=[], index_period_beginning=[], distribution='poisson'):
     
     client_amout = len(arr_date_time)
 
-    df = _stats._eval_real_relative_frequencys(arr_date_time, index_period_beginning)
-    totalMinutes = sum(df['occurrence_per_minutes'].values)
+    df = _stats._eval_real_relative_frequency(arr_date_time, index_period_beginning)
+    totalMinutes = sum(df['frequency'].values)
 
     rate = client_amout/totalMinutes
 
     dictionary = {}
     aux = []
 
-    for m in df['minutes'].values:
+    for m in df['ocurrence'].values:
         aux.append(m)
     dictionary['ocurrence'] = aux
     
     aux = []
 
-    for a in df['occurrence_per_minutes'].values:
+    for a in df['frequency'].values:
         aux.append(a)
     dictionary['frequency'] = aux
 
@@ -77,7 +77,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
 
     if distribution == 'poisson':
 
-        df['theoretical_relative_frequency'] = _stats._poison_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._poison_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)
@@ -85,7 +85,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
 
     elif distribution == 'exponential':
 
-        df['theoretical_relative_frequency'] = _stats._exponential_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._exponential_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)
@@ -93,7 +93,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
         
     elif distribution == 'exponentialnorm':
 
-        df['theoretical_relative_frequency'] = _stats._exponentialnorm_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._exponentialnorm_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)
@@ -101,7 +101,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
 
     elif distribution == 'exponentialpow':
 
-        df['theoretical_relative_frequency'] = _stats._exponentialpow_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._exponentialpow_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)
@@ -109,7 +109,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
 
     elif distribution == 'erlang':
 
-        df['theoretical_relative_frequency'] = _stats._erlang_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._erlang_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)
@@ -117,7 +117,7 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
     
     elif distribution == 'gamma':
 
-        df['theoretical_relative_frequency'] = _stats._gamma_distribution(rate, df['minutes'].values)
+        df['theoretical_relative_frequency'] = _stats._gamma_distribution(rate, df['ocurrence'].values)
         aux = []
         for a in df['theoretical_relative_frequency'].values:
             aux.append(a)

@@ -8,31 +8,31 @@ from . import _multiserver
 # c is the number of servers of the queue system.
 #-------------------------------------------------
 
-def eval_Ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
      
     ws = _multiserver._eval_Ws(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ws
 
-def eval_Wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     wq = _multiserver._eval_Wq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return wq
 
-def eval_Ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     ls = _multiserver._eval_Ls(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ls
 
-def eval_Lq(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def lq(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     lq = _multiserver._eval_Lq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return lq
 
-def eval_pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
     
     """This funtion evaluate the probability do have 0 persons/items in the queue
 
@@ -62,7 +62,7 @@ def eval_pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_ti
 
     return pn
 
-def eval_p0(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def p0(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
     """This funtion evaluate the probability do have 0 persons/items in the queue
 
         Parameters:
@@ -89,7 +89,7 @@ def eval_p0(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=
 
     return p0
 
-def eval_roh(arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def roh(arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     """This funtion evaluate the roh = lambda/mi.
 
@@ -116,7 +116,7 @@ def eval_roh(arrival_times=[], index_period_beginning_arrival=[], leave_times=[]
     return roh
 
 
-def eval_lambda_n(n=0, arr_date_time=[], index_period_beginning=[]):
+def lambda_n(n=0, arr_date_time=[], index_period_beginning=[]):
     """This funtion evaluate the lambda n.
 
         Parameters:
@@ -137,7 +137,7 @@ def eval_lambda_n(n=0, arr_date_time=[], index_period_beginning=[]):
 
     return lambda_n
 
-def eval_mi_n(n=0, c=1, leave_times=[], index_period_beginning=[]):
+def mi_n(n=0, c=1, leave_times=[], index_period_beginning=[]):
     """This funtion evaluate the mi n.
 
         Parameters:
