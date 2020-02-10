@@ -16,13 +16,13 @@ def occurrence_per_minutes(arr_date_time=[], index_period_beginning=[]):
 
     for m in df['minutes'].values:
         aux.append(m)
-    dictionary['minutes'] = aux
+    dictionary['ocurrence'] = aux
     
     aux = []
 
     for a in df['occurrence_per_minutes'].values:
         aux.append(a)
-    dictionary['occurrence_per_minutes'] = aux
+    dictionary['frequency'] = aux
 
     return dictionary
 
@@ -33,12 +33,12 @@ def occurrence_relative_frequencys(arr_date_time=[], index_period_beginning=[]):
     aux = []
     for m in df['minutes'].values:
         aux.append(m)
-    dictionary['minutes'] = aux
+    dictionary['ocurrence'] = aux
     
     aux = []
     for a in df['occurrence_per_minutes'].values:
         aux.append(a)
-    dictionary['occurrence_per_minutes'] = aux
+    dictionary['frequency'] = aux
 
     aux = []
     for a in df['real_relative_frequency'].values:
@@ -61,13 +61,13 @@ def occurrence_theoretical_comparation(arr_date_time=[], index_period_beginning=
 
     for m in df['minutes'].values:
         aux.append(m)
-    dictionary['minutes'] = aux
+    dictionary['ocurrence'] = aux
     
     aux = []
 
     for a in df['occurrence_per_minutes'].values:
         aux.append(a)
-    dictionary['occurrence_per_minutes'] = aux
+    dictionary['frequency'] = aux
 
     aux = []
 
