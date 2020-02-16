@@ -8,27 +8,27 @@ from . import _multiserver
 # c is the number of servers of the queue system.
 #-------------------------------------------------
 
-def ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def ws(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
      
-    ws = _multiserver._eval_Ws(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    ws = _multiserver._eval_Ws(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ws
 
-def wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def wq(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    wq = _multiserver._eval_Wq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    wq = _multiserver._eval_Wq(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return wq
 
-def ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def ls(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    ls = _multiserver._eval_Ls(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    ls = _multiserver._eval_Ls(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return ls
 
-def lq(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def lq(c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    lq = _multiserver._eval_Lq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    lq = _multiserver._eval_Lq(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     return lq
 

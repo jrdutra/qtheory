@@ -1,9 +1,9 @@
 from math import factorial
 from . import _stats
 
-def _eval_Ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def _eval_Ws(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
      
-    ls = _eval_Ls(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    ls = _eval_Ls(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     mlambda = _stats._eval_rate(arrival_times, index_period_beginning_arrival)
 
@@ -11,8 +11,8 @@ def _eval_Ws(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_ti
 
     return ws
 
-def _eval_Wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
-    lq = _eval_Lq(n, c,  arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+def _eval_Wq(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+    lq = _eval_Lq(c,  arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     mlambda = _stats._eval_rate(arrival_times, index_period_beginning_arrival)
 
@@ -20,9 +20,9 @@ def _eval_Wq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_ti
 
     return wq
 
-def _eval_Ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def _eval_Ls(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
-    lq = _eval_Lq(n, c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
+    lq = _eval_Lq(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
     roh = _eval_roh(arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
 
@@ -30,7 +30,7 @@ def _eval_Ls(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_ti
 
     return ls
 
-def _eval_Lq(n, c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
+def _eval_Lq(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
 
     roh = _eval_roh(arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
     p0 = _eval_p0(c, arrival_times, index_period_beginning_arrival, leave_times, index_period_beginning_leave)
