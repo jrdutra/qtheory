@@ -1,5 +1,4 @@
 from . import _stats
-from . import _utils
 
 #----------------------------------
 # occurrence public functions

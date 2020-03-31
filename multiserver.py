@@ -34,7 +34,7 @@ def lq(c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], 
 
 def pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
     
-    """This funtion evaluate the probability do have 0 persons/items in the queue
+    """This funtion evaluate the probability do have 0 persons/items in the system
 
         Parameters:
 
@@ -63,7 +63,7 @@ def pn(n, c,  arrival_times=[], index_period_beginning_arrival=[], leave_times=[
     return pn
 
 def p0(c, arrival_times=[], index_period_beginning_arrival=[], leave_times=[], index_period_beginning_leave=[]):
-    """This funtion evaluate the probability do have 0 persons/items in the queue
+    """This funtion evaluate the probability do have 0 persons/items in the system
 
         Parameters:
 
