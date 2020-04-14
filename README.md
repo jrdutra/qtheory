@@ -1,7 +1,8 @@
 # Instalation
 
 [![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
-[![PyPi](https://img.shields.io/badge/pypi%20package-1.0.0-green.svg)](https://pypi.org/project/qtheory/)
+[![PyPi](https://img.shields.io/badge/pypi%20package-1.0.0-green.svg)](https://pypi.org/project/qtheory/)  
+
 You can instal qtheory using PyPi by running the followed command line:
 ```bash
 pip install qtheory
