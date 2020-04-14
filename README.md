@@ -19,6 +19,12 @@ qtheory
 
 
 ```
+### Library Functions
+
+As you can see in the diagram, circled by red, the qtheory public functions.
+By default, all functions **started with "_"**, is private, and have to be used just by the library.
+
+![PlantUML model](https://raw.githubusercontent.com/jrdutra/qtheory-suport/master/images/diagrama-classe.png)
 
 ### The Library Data Flow
 
