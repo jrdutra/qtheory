@@ -1,3 +1,12 @@
+# Instalation
+
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![PyPi](https://img.shields.io/badge/pypi%20package-1.0.0-green.svg)](https://pypi.org/project/qtheory/)
+You can instal qtheory using PyPi by running the followed command line:
+```bash
+pip install qtheory
+```
+
 # About The Library
 It is a **Python library** implementing the Queueing theory calculations.
 As my term paper, I am developing a library, implementing the calculus of queuing theory. This library has the objective of characterising some queuing theory params as the queue arrival rate of clients, attendance rate and others...
