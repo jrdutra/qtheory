@@ -1,0 +1,15 @@
+LICENSE.txt
+README.md
+setup.cfg
+setup.py
+qtheory/__init__.py
+qtheory/_multiserver.py
+qtheory/_stats.py
+qtheory/_utils.py
+qtheory/multiserver.py
+qtheory/stats.py
+qtheory.egg-info/PKG-INFO
+qtheory.egg-info/SOURCES.txt
+qtheory.egg-info/dependency_links.txt
+qtheory.egg-info/requires.txt
+qtheory.egg-info/top_level.txt
